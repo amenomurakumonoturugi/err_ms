@@ -512,7 +512,12 @@ private:
 
         for (const MESSAGE_DATA::Following_Prototype& Prototype : MESSAGE_DATA::Folloeing_Table) {
 
-            if (Prototype.Error_Code == error) {
+            ulong Primary_Value;
+
+            if (GET_PRIMARY_ERROR_CODE(error, Primary_Value) != ERROR_SUCCESS)
+                return NULL_STRING;
+
+            if (Prototype.Error_Code == Primary_Value) {
 
                 if (lang == JP)
                     return Prototype.Jp.data();
@@ -548,6 +553,13 @@ public:
             result.append(L"\r\n");
             result.append(Message);
             result.append(L"\r\n");
+
+            if (Following != NULL_STRING) {
+
+                result.append(Following);
+                result.append(L"\r\n");
+            }
+
             result.append(ERROR_CODE_TEXT_JP.data());
         }
 
@@ -557,6 +569,13 @@ public:
             result.append(L"\r\n");
             result.append(Message);
             result.append(L"\r\n");
+
+            if (Following != NULL_STRING) {
+
+                result.append(Following);
+                result.append(L"\r\n");
+            }
+
             result.append(ERROR_CODE_TEXT_EN.data());
         }
 
@@ -571,12 +590,6 @@ public:
                 result.append(SPACE_STRING);
             }
         }   
-
-        if (Following != NULL_STRING) {
-
-            result.append(LINE_BREAK);
-            result.append(Following);
-        }
 
         result.append(L"\r\n");
 
