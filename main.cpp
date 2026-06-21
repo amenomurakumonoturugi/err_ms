@@ -487,7 +487,12 @@ private:
 
         for (const MESSAGE_DATA::Message_Prototype& Prototype : MESSAGE_DATA::Message_Table) {
 
-            if (Prototype.Error_Code == error) {
+            ulong Primary_Value;
+
+            if (GET_PRIMARY_ERROR_CODE(error, Primary_Value) != ERROR_SUCCESS)
+                return NULL_STRING;
+
+            if (Prototype.Error_Code == Primary_Value) {
 
                 if (lang == JP)
                     return Prototype.Jp.data();
