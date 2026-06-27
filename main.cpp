@@ -641,7 +641,7 @@ public:
     }
 };
 
-class COMPOSITION_ERR_FLOW : public COMPOSITION_FILE_FLOW {
+class COMPOSITION_ERR_FLOW : public FLOW_FILE_CONTROLLER {
 
 public:
 
