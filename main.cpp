@@ -1,3 +1,4 @@
+#include <afxwin.h>
 
 #include "common_mqh_cpp_PCH.h"
 
